@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Showcase - Portofolio Teman Kelas</title>
+    
+    <!-- CSS Internal Murni - Bebas Pengaruh Jaringan CDN (100% Anti Berantakan) -->
+    <style>
+        /* Variables Theme (Light / Dark Mode) */
+        :root {
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-nav: rgba(255, 255, 255, 0.85);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #e0e7ff;
+            --primary-text: #3730a3;
+            --badge-bg: #f1f5f9;
+            --badge-text: #475569;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            --radius-lg: 16px;
+            --radius-sm: 8px;
+        }
+
+        .dark {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-nav: rgba(30, 41, 59, 0.85);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-light: #312e81;
+            --primary-text: #c7d2fe;
+            --badge-bg: #334155;
+            --badge-text: #cbd5e1;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background-color: var(--bg-nav);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            color: white;
+            font-weight: 800;
+            font-size: 20px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+        }
+
+        .brand-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .brand-sub {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-icon {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Hero & Controls */
+        .hero {
+            padding: 32px 16px 16px 16px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge-year {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--primary-light);
+            color: var(--primary-text);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .search-filter-section {
+            max-width: 1200px;
+            margin: 20px auto 10px auto;
+            padding: 0 16px;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+            box-shadow: var(--shadow);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Grid Cards */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        /* KUNCI SUPAYA FOTO / FALLBACK TIDAK BESAR RAKSASA */
+        .card-img-wrap {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            max-height: 240px;
+            background: #cbd5e1;
+            overflow: hidden;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-category {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(4px);
+            color: white;
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .card-role {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .skill-badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .btn-detail {
+            width: 100%;
+            padding: 9px;
+            background: var(--primary-light);
+            color: var(--primary-text);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-detail:hover {
+            opacity: 0.9;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 16px;
+            color: var(--text-muted);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 32px 16px;
+            margin-top: 40px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-container h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-body);
+            color: var(--text-main);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal Overlay & Card */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 480px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.25s ease;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), #818cf8);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.3);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .modal-body {
+            padding: 0 20px 20px 20px;
+            position: relative;
+        }
+
+        .modal-avatar-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 4px solid var(--bg-card);
+            overflow: hidden;
+            margin-top: -45px;
+            background: #cbd5e1;
+            box-shadow: var(--shadow);
+            margin-bottom: 12px;
+        }
+
+        .modal-avatar-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .quote-box {
+            background: var(--badge-bg);
+            border-left: 3px solid var(--primary);
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-style: italic;
+            font-size: 13px;
+            margin: 12px 0;
+            color: var(--text-main);
+        }
+
+        footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <div class="brand-logo">K</div>
+                <div>
+                    <div class="brand-title">Class X.TKJ 1</div>
+                    <div class="brand-sub">Portofolio Kelas Kita</div>
+                </div>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-icon" id="themeToggle" title="Mode Gelap/Terang">🌙</button>
+                <a href="#tambah" class="btn-primary">+ Data</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="badge-year">Angkatan 2026 / 2029</span>
+        <h1>Mengenal Teman Kelas</h1>
+        <p>Silaturahmi, data diri, serta bidang keahlian keanggotaan kelas kita.</p>
+    </section>
+
+    <!-- Controls (Search & Filter) -->
+    <div class="search-filter-section">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Cari nama, peran, atau keahlian...">
+        </div>
+        <div class="filter-container" id="filterContainer">
+            <button class="filter-btn active" data-category="all">Semua (<span id="countAll">0</span>)</button>
+            <button class="filter-btn" data-category="Teknologi">💻 Teknologi</button>
+            <button class="filter-btn" data-category="Desain & Seni">🎨 Desain & Seni</button>
+            <button class="filter-btn" data-category="Organisasi">👑 Organisasi</button>
+            <button class="filter-btn" data-category="Olahraga">⚽ Olahraga</button>
+            <button class="filter-btn" data-category="Belajar">📚Membaca/Menganalisis jawaban</button>
+        </div>
+    </div>
+
+    <!-- Main Grid Content -->
+    <main>
+        <div class="grid" id="studentGrid"></div>
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <h3>Data tidak ditemukan</h3>
+            <p>Coba gunakan kata kunci lain.</p>
+        </div>
+    </main>
+
+    <!-- Modal Pop-up Biodata -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <button class="modal-close" id="closeModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-avatar-wrap">
+                    <img id="modalFoto" src="" alt="Avatar">
+                </div>
+                <span id="modalKategori" class="badge-year"></span>
+                <h2 id="modalNama" style="font-size: 20px; font-weight: 800;"></h2>
+                <div id="modalPeran" style="color: var(--text-muted); font-size: 13px;"></div>
+
+                <div class="quote-box" id="modalQuote"></div>
+
+                <div style="margin-top: 12px;">
+                    <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Keahlian</div>
+                    <div class="skills-list" id="modalSkills" style="margin-top: 6px;"></div>
+                </div>
+
+                <div style="margin-top: 8px;">
+                    <div style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Cita - Cita</div>
+                    <div id="modalCitaCita" style="font-size: 13px; font-weight: 600; margin-top: 2px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Section -->
+    <section class="form-section" id="tambah">
+        <div class="form-container">
+            <h2>+ Tambah Data Teman</h2>
+            <form id="addForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Lengkap *</label>
+                        <input type="text" id="fNama" required placeholder="Contoh: Budi Santoso">
+                    </div>
+                    <div class="form-group">
+                        <label>Peran / Tugas *</label>
+                        <input type="text" id="fPeran" required placeholder="Contoh: Ketua Kelas">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Kategori *</label>
+                        <select id="fKategori">
+                            <option value="Teknologi">Teknologi</option>
+                            <option value="Desain & Seni">Desain & Seni</option>
+                            <option value="Organisasi">Organisasi</option>
+                            <option value="Olahraga">Olahraga</option>
+                            <option value="Belajar">Belajar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama File Foto (.jpg)</label>
+                        <input type="text" id="fFoto" placeholder="Contoh: budi-santoso.jpg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Keahlian (Pisahkan dengan koma)</label>
+                    <input type="text" id="fKeahlian" placeholder="Coding, Basket, Design">
+                </div>
+                <div class="form-group">
+                    <label>Quote / Motto Hidup</label>
+                    <textarea id="fQuote" rows="2" placeholder="Kata kata bijak..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px;">Simpan Data</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p> Portfolio Class X.TKJ(ONES)&copy; 2026</p>
+    </footer>
+
+    <!-- Script Logika Aplikasi -->
+    <script>
+        // Generator SVG Avatar Fallback Rapi saat foto lokal tidak ditemukan
+        function generateAvatarSVG(name) {
+            const initials = name ? name.split(' ').map(n => n[0]).slice(0, 2).join('').toUpperCase() : '??';
+            const colors = ['#4f46e5', '#2563eb', '#0d9488', '#d97706', '#dc2626', '#7c3aed'];
+            let hash = 0;
+            for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+            const color = colors[Math.abs(hash) % colors.length];
+
+            const svg = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 100">
+                    <rect width="100" height="100" fill="${color}"/>
+                    <text x="50" y="55" font-family="sans-serif" font-size="36" font-weight="bold" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">${initials}</text>
+                </svg>
+            `;
+            return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+        }
+
+        // Data Awal Teman Kelas
+        const initialStudents = [
+            {
+                id: 1,
+                nama: "Fatih Aliman nafis",
+                peran: "ketua kelas/danton",
+                kategori: "Ngocok",
+                foto: "foto/nafis.jpg",
+                keahlian: ["si kocok", "ngocok handal", "Taruna"],
+                quote: "Ngocok Selalu jika ange.",
+                citaCita: "Tni"
+            },
+            {
+                id: 2,
+                nama: "Riski Samudra",
+                peran: "Slot",
+                kategori: "Slot & Seni",
+                foto: "foto/iki.jpg",
+                keahlian: ["Mahjong Ways", "Zeus", "Ngocok Handal"],
+                quote: "Slot Bukan Sekadar Slot, tetapi slot adalah Seni dari keterampilan Seseorang",
+                citaCita: "Penyelot Handal"
+            },
+            {
+                id: 3,
+                nama: "Kenzie arsafin",
+                peran: "Teknologi & jaringan",
+                kategori: "Teknologi",
+                foto: "foto/kenzie.jpg",
+                keahlian: ["merakit", "Mencari Kesalahan Computer", "Fotografi"],
+                quote: "Kreativitas tidak memiliki batas.",
+                citaCita: "Mekanik Computer"
+            },
+            {
+                id: 4,
+                nama: "Hafiz Fairuz Arman",
+                peran: "Teknologi/ Ai Enginering",
+                kategori: "Teknologi",
+                foto: "foto/hafiz.jpg",
+                keahlian: ["Ngeprompt", "Mecut ai", "Ai pecut"],
+                quote: "Pecut terus ai mu sampain.",
+                citaCita: "Media Manager"
+            },
+            {
+                id: 5,
+                nama: "Fernando Anugrah..",
+                peran: "Belajar / keterampilan",
+                kategori: "Belajar",
+                foto: "foto/fernando.jpg",
+                keahlian: ["Taruna", "Matematika", "Ngocok"],
+                quote: "Tubuh yang sehat melahirkan pikiran yang kuat.",
+                citaCita: "Ngoc9k & matematic"
+            },
+            {
+                id: 6,
+                nama: "Ibnu Arifin",
+                peran: "Programmer / Bug",
+                kategori: "Teknologi",
+                foto: "foto/gua.jpg",
+                keahlian: ["Coding", "Menulis", "Bug"],
+                quote: "Semakin dalam luka yang dia kasih, Semakin dalam pula Bug virtex yang kuberikan sebagai pelampiasan",
+                citaCita: "Mau bahagiain mamah."
+            }
+        ];
+
+        let students = [...initialStudents];
+        let activeCategory = 'all';
+        let searchQuery = '';
+
+        const studentGrid = document.getElementById('studentGrid');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const countAll = document.getElementById('countAll');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // Modal Elements
+        const detailModal = document.getElementById('detailModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalFoto = document.getElementById('modalFoto');
+        const modalNama = document.getElementById('modalNama');
+        const modalPeran = document.getElementById('modalPeran');
+        const modalKategori = document.getElementById('modalKategori');
+        const modalQuote = document.getElementById('modalQuote');
+        const modalSkills = document.getElementById('modalSkills');
+        const modalCitaCita = document.getElementById('modalCitaCita');
+
+        // Render Cards Grid
+        function renderGrid() {
+            const filtered = students.filter(student => {
+                const matchCat = activeCategory === 'all' || student.kategori === activeCategory;
+                const matchSearch = student.nama.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    student.peran.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                    student.keahlian.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+                return matchCat && matchSearch;
+            });
+
+            countAll.textContent = students.length;
+
+            if (filtered.length === 0) {
+                studentGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            studentGrid.style.display = 'grid';
+
+            studentGrid.innerHTML = filtered.map(student => {
+                const fallbackSVG = generateAvatarSVG(student.nama);
+                return `
+                    <div class="card">
+                        <div class="card-img-wrap">
+                            <span class="card-category">${student.kategori}</span>
+                            <img src="${student.foto}" 
+                                 alt="${student.nama}" 
+                                 onerror="this.onerror=null; this.src='${fallbackSVG}';">
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <div class="card-title">${student.nama}</div>
+                                <div class="card-role">${student.peran}</div>
+                                <div class="skills-list">
+                                    ${student.keahlian.map(skill => `<span class="skill-badge">${skill}</span>`).join('')}
+                                </div>
+                            </div>
+                            <button class="btn-detail" onclick="openModal(${student.id})">Lihat Biodata →</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Handle Modal Detail
+        window.openModal = function(id) {
+            const student = students.find(s => s.id === id);
+            if (!student) return;
+
+            const fallbackSVG = generateAvatarSVG(student.nama);
+            modalFoto.src = student.foto;
+            modalFoto.onerror = function() {
+                this.onerror = null;
+                this.src = fallbackSVG;
+            };
+
+            modalNama.textContent = student.nama;
+            modalPeran.textContent = student.peran;
+            modalKategori.textContent = student.kategori;
+            modalQuote.textContent = student.quote ? `"${student.quote}"` : '"Belum menambahkan quote."';
+            modalCitaCita.textContent = student.citaCita || '-';
+
+            modalSkills.innerHTML = student.keahlian.map(skill => `
+                <span class="skill-badge" style="background: var(--primary-light); color: var(--primary-text); font-weight: 600;">${skill}</span>
+            `).join('');
+
+            detailModal.classList.add('active');
+        };
+
+        closeModal.addEventListener('click', () => detailModal.classList.remove('active'));
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) detailModal.classList.remove('active');
+        });
+
+        // Filter Buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                activeCategory = this.dataset.category;
+                renderGrid();
+            });
+        });
+
+        // Search Input
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            renderGrid();
+        });
+
+        // Form Submit
+        document.getElementById('addForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nama = document.getElementById('fNama').value;
+            const peran = document.getElementById('fPeran').value;
+            const kategori = document.getElementById('fKategori').value;
+            let foto = document.getElementById('fFoto').value.trim();
+            const keahlianRaw = document.getElementById('fKeahlian').value;
+            const quote = document.getElementById('fQuote').value;
+
+            if (foto && !foto.startsWith('foto/')) {
+                foto = 'foto/' + foto;
+            } else if (!foto) {
+                foto = 'foto/' + nama.toLowerCase().replace(/\s+/g, '-') + '.jpg';
+            }
+
+            const keahlian = keahlianRaw ? keahlianRaw.split(',').map(s => s.trim()) : ['Anggota Kelas'];
+
+            students.unshift({
+                id: Date.now(),
+                nama,
+                peran,
+                kategori,
+                foto,
+                keahlian,
+                quote,
+                citaCita: "Sukses Bersama"
+            });
+
+            renderGrid();
+            this.reset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Dark Mode Switcher
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            themeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        });
+
+        // Initial Render
+        renderGrid();
+    </script>
+</body>
+</html>
